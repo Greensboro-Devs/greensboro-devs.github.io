@@ -17,6 +17,9 @@ body {
     flex-direction: column;
     color: #0A0A0A;
     padding: 32px;
+    
+    /* background-color: #FAFAFA; */
+    isolation: isolate;
 }
 
 h1 {
@@ -27,7 +30,6 @@ h1 {
     position: relative;
     text-align: right;
     font-family: 'Bungee Shade', sans-serif;
-    transform: translate3d(0, 0, 1);
 }
 
 h1::before {
@@ -45,6 +47,21 @@ h1::before {
     pointer-events: none;
 }
 
+h1::after {
+    background-color: #FAFAFA;
+    z-index: -1;
+    
+    content: "";
+    position: absolute;
+    width: calc(100% + 4px);
+    height: 100%;
+    left: 2px;
+    bottom: 0;
+    transform: rotate(-8deg);
+
+    pointer-events: none;   
+}
+
 .title-prefix {
     font-size: 18px;
     position: absolute;
@@ -55,14 +72,14 @@ h1::before {
 }
 
 #scroll-indicator {
-    font-size: 16px;
     position:absolute;
-    bottom: -16px;
-    left: 50%;
-    transform: translateX(50%);
+    font-size: 32px;
+    bottom: 16px;
+    width: 100%;
     animation: scroll-indicator-animation linear infinite;
     animation-duration: 1s;
     transition: opacity 1s;
+    text-align: center;
 }
 
 @keyframes scroll-indicator-animation {
@@ -90,6 +107,10 @@ h1::before {
         top: -24px;
         left: 8px;
     }
+
+    #scroll-indicator {
+        font-size: 40px;
+    }
 }
 
 /* HOME SECTION - DESKTOP */
@@ -102,6 +123,10 @@ h1::before {
         font-size: 44px;
         top: -40px;
         left: 16px;
+    }
+
+    #scroll-indicator {
+        font-size: 48px;
     }
 }
 
@@ -302,7 +327,7 @@ h1::before {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: -2;
     display: flex;
     justify-content: space-between;
 }

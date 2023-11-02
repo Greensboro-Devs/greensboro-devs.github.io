@@ -27,7 +27,7 @@ h1 {
     position: relative;
     text-align: right;
     font-family: 'Bungee Shade', sans-serif;
-    
+    transform: translate3d(0, 0, 1);
 }
 
 h1::before {

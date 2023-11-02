@@ -18,7 +18,7 @@ body {
     color: #0A0A0A;
     padding: 32px;
     
-    /* background-color: #FAFAFA; */
+    transform: translate3d(0, 0, 0);
     isolation: isolate;
 }
 

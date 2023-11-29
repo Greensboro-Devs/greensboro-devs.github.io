@@ -1,6 +1,7 @@
 /* BASE LAYOUT */
 
-html, body {
+html,
+body {
     padding: 0;
     margin: 0;
 }
@@ -33,7 +34,8 @@ h1 {
     transform: translate3d(0, 0, 0);
 }
 
-h1::before, h1::after {
+h1::before,
+h1::after {
     background-color: #FAFAFA;
 
     content: "";
@@ -54,20 +56,6 @@ h1::before {
 h1::after {
     z-index: -1;
 }
-/* h1::after {
-    background-color: #FAFAFA;
-    z-index: -1;
-    
-    content: "";
-    position: absolute;
-    width: calc(100% + 4px);
-    height: 100%;
-    left: 2px;
-    bottom: 0;
-    transform: rotate(-8deg);
-
-    pointer-events: none;   
-} */
 
 .title-prefix {
     font-size: 18px;
@@ -79,7 +67,7 @@ h1::after {
 }
 
 #scroll-indicator {
-    position:absolute;
+    position: absolute;
     font-size: 32px;
     bottom: 16px;
     width: 100%;
@@ -166,18 +154,16 @@ h1::after {
     color: #CE8147;
 }
 
-#about div:nth-child(2) h2  {
+#about div:nth-child(2) h2 {
     color: #499167;
 }
 
-#about div:nth-child(3) h2  {
+#about div:nth-child(3) h2 {
     color: #2176AE;
 }
 
 /* ABOUT SECTION - TABLET */
-@media screen and (min-width: 768px) {
-    
-}
+@media screen and (min-width: 768px) {}
 
 /* ABOUT SECTION - DESKTOP */
 @media screen and (min-width: 1024px) {
@@ -233,7 +219,7 @@ h1::after {
     font-weight: 600;
     padding: 16px 32px;
     color: #FAFAFA;
-    background-image: repeating-linear-gradient(90deg, #CE8147, #499167 25%, #2176AE 50%, #499167 75%, #CE8147 );
+    background-image: repeating-linear-gradient(90deg, #CE8147, #499167 25%, #2176AE 50%, #499167 75%, #CE8147);
     background-size: 200% 100%;
     overflow: hidden;
     text-decoration: none;
@@ -245,7 +231,7 @@ h1::after {
     box-shadow:
         0 0 0 12px #0A0A0A,
         0 0 0 16px #FAFAFA;
- 
+
 }
 
 @keyframes button-animation {
@@ -281,7 +267,7 @@ h1::after {
 }
 
 /* INFO SECTION - DESKTOP */
-@media screen and (min-width: 1024px) { 
+@media screen and (min-width: 1024px) {
     #info {
         padding: 128px 0 64px;
     }
@@ -314,9 +300,7 @@ h1::after {
 }
 
 /* FOOTER SECTION - TABLET */
-@media screen and (min-width: 768px) {
-
-}
+@media screen and (min-width: 768px) {}
 
 /* FOOTER SECTION - DESKTOP */
 @media screen and (min-width: 1024px) {
@@ -407,7 +391,7 @@ h1::after {
 @keyframes home-animation {
     0% {
         transform: translateY(0);
-         /* rotate(0deg); */
+        /* rotate(0deg); */
         opacity: 0.75;
     }
 
@@ -427,4 +411,3 @@ h1::after {
         font-size: 32px;
     }
 }
-

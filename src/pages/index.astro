@@ -1,0 +1,76 @@
+---
+import ThemeLoader from "../components/themes/ThemeLoader.astro";
+import ThemeSelector from "../components/themes/ThemeSelector.astro";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Cabin&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/ce3fc6383c.js"
+      crossorigin="anonymous"></script>
+    <ThemeLoader theme="default" />
+    <title>Greensboro Devs</title>
+  </head>
+
+  <body>
+    <ThemeSelector />
+    <section id="home">
+      <h1>
+        <span class="title-prefix">Welcome to</span> Greensboro <br /> Devs
+      </h1>
+      <i id="scroll-indicator" class="fa-solid fa-chevron-down"></i>
+    </section>
+    <section id="about">
+      <div>
+        <h2><i class="fa-solid fa-users"></i>Our Community</h2>
+        <p>
+          We are programmers and tech enthusiasts located in Greensboro, NC and
+          surrounding areas. Whether you're a beginner or a seasoned developer,
+          we're here to connect, learn, and grow together.
+        </p>
+      </div>
+
+      <div>
+        <h2><i class="fa-solid fa-calendar"></i>How We Engage</h2>
+        <p>
+          We host monthly meetups for project sharing, tech discussions,
+          networking, and learning. We embrace a broad spectrum of programming
+          topics, spanning web development, game design, and much more.
+        </p>
+      </div>
+      <div>
+        <h2><i class="fa-solid fa-rocket"></i>Our Vision</h2>
+        <p>
+          We see Greensboro Devs as the go-to hub for local tech enthusiasts to
+          come together, learn, and be creative. We aim to create a thriving,
+          inclusive community where we can share our passion for programming.
+        </p>
+      </div>
+    </section>
+    <section id="info">
+      <h2 class="section-title">Get Involved</h2>
+      <a href="https://discord.gg/MRf6ACrrMJ" target="_blank" class="button">
+        <i class="fa-brands fa-discord"></i> Join us on Discord
+      </a>
+      <a
+        href="https://www.meetup.com/greensboro-devs/"
+        target="_blank"
+        class="link"
+      >
+        Or check us out on Meetup.com
+      </a>
+    </section>
+    <section id="footer">
+      <p>© 2023 Greensboro Devs Community</p>
+    </section>
+  </body>
+</html>

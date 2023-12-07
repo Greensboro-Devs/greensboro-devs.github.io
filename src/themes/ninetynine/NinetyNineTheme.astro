@@ -1,0 +1,93 @@
+---
+import Theme from "../Theme.astro";
+
+const name = "1999";
+const id = "ninety-nine";
+---
+
+<Theme id={id} name={name} />
+
+<script define:vars={{ id }}>
+    const theme = document.getElementById(id);
+
+    theme.onLoad = () => {
+        const icons = document.querySelectorAll("i");
+        icons.forEach((element) => {
+            element.style.display = "none";
+        });
+    };
+
+    theme.onUnload = () => {
+        const icons = document.querySelectorAll("i");
+        icons.forEach((element) => {
+            element.style.display = "inline";
+        });
+    };
+</script>
+
+<style id={`style-${id}`} is:global is:inline>
+    body {
+    }
+
+    h1 {
+        font-size: 68px;
+        color: transparent;
+        background: radial-gradient(ellipse at center, yellow, orange);
+        background-clip: text;
+        text-align: center;
+    }
+
+    #about div {
+        text-align: center;
+        border: 1px solid black;
+        margin-bottom: 8px;
+    }
+
+    #about div h2 {
+        text-decoration: underline;
+    }
+
+    #about div:nth-child(1) h2 {
+        color: red;
+    }
+
+    #about div:nth-child(2) h2 {
+        color: green;
+    }
+
+    #about div:nth-child(3) h2 {
+        color: blue;
+    }
+
+    #info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    #info .button {
+        display: block;
+        text-align: center;
+        min-width: 200px;
+        padding: 20px;
+        background-color: darkgray;
+        border-top: 4px solid lightgray;
+        border-left: 4px solid lightgray;
+        border-right: 4px solid gray;
+        border-bottom: 4px solid gray;
+        margin-bottom: 20px;
+    }
+
+    #info .button:hover {
+        background-color: lightgray;
+        border-top: 4px solid whitesmoke;
+        border-left: 4px solid whitesmoke;
+        border-right: 4px solid black;
+        border-bottom: 4px solid black;
+    }
+
+    #footer {
+        text-align: center;
+    }
+</style>

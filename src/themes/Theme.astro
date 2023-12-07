@@ -1,0 +1,46 @@
+---
+interface Props {
+  id: string;
+  name: string;
+}
+
+const { id, name } = Astro.props;
+---
+
+<site-theme id={id} name={name}></site-theme>
+
+<script>
+  export class SiteTheme extends HTMLElement {
+    constructor() {
+      super();
+      this.setStylingDisabled();
+    }
+
+    load() {
+      console.log(`[Theme]: Loading ${this.id}`);
+      this.setStylingDisabled(false);
+      this.onLoad();
+    }
+
+    onLoad() {
+      // to be overwritten in child classes
+    }
+
+    unload() {
+      console.log(`[Theme]: Unloading ${this.id}`);
+      this.setStylingDisabled();
+      this.onUnload();
+    }
+
+    onUnload() {
+      // to be overwritten in child classes
+    }
+
+    setStylingDisabled(disabled: boolean = true) {
+      const styles = document.getElementById(`style-${this.id}`);
+      if (styles !== null) (styles as HTMLStyleElement).disabled = disabled;
+    }
+  }
+
+  customElements.define("site-theme", SiteTheme);
+</script>

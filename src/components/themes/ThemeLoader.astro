@@ -1,58 +1,76 @@
 ---
-
+import DefaultTheme from "../../themes/default/DefaultTheme.astro";
+import MFWebsiteTheme from "../../themes/mfwebsite/MFWebsiteTheme.astro";
 ---
 
+<site-theme-loader>
+  <DefaultTheme />
+  <MFWebsiteTheme />
+</site-theme-loader>
+
 <script>
-  import { default as Default } from "../../themes/default/default";
-  import { default as MFWebsite } from "../../themes/mfwebsite/mfwebsite";
-  import { SiteTheme } from "../../themes/theme";
+  class SiteThemeLoader extends HTMLElement {
+    currentTheme: string | null = null;
 
-  document.addEventListener("DOMContentLoaded", () => {
-    initialize();
-  });
+    constructor() {
+      super();
 
-  const THEMES: Record<string, SiteTheme> = {
-    default: Default,
-    mfwebsite: MFWebsite,
-  };
+      window.addEventListener("themeChange", (e: Event) => {
+        const newThemeId = (e as CustomEvent).detail;
+        this.loadTheme(newThemeId);
+      });
 
-  let currentTheme: SiteTheme | null = null;
+      window.addEventListener("DOMContentLoaded", () => {
+        const storedTheme = this.getStoredTheme();
+        if (storedTheme !== undefined && storedTheme !== null)
+          this.loadTheme(storedTheme);
+        else this.loadTheme("default");
 
-  const initialize = () => {
-    const theme = loadTheme();
-    updateTheme(theme);
-  };
+        const allSiteThemes = this.querySelectorAll("site-theme");
+        const themeList = Array.from(allSiteThemes).map((element) => {
+          return {
+            id: element.id,
+            name: element.getAttribute("name"),
+            active: element.id === this.currentTheme,
+          };
+        });
 
-  const loadTheme = () => {
-    // Retrieves theme from local storage, with fallback to default theme.
-    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-      return localStorage.getItem("theme") as string;
+        const event = new CustomEvent("themeListLoaded", { detail: themeList });
+
+        window.dispatchEvent(event);
+      });
+
+      this.loadTheme.bind(this);
     }
-    return "default";
-  };
 
-  declare global {
-    interface Window {
-      updateTheme: (theme: string) => Promise<void>;
+    loadTheme(id: string) {
+      const theme = this.querySelector(`#${id}`);
+      if (theme !== null) {
+        if (this.currentTheme !== null) {
+          const prevTheme = this.querySelector(`#${this.currentTheme}`);
+          if (prevTheme !== null) prevTheme.unload();
+        }
+        theme.load();
+        this.currentTheme = theme.id;
+        this.setStoredTheme(theme.id);
+      } else {
+        console.log("Theme is null.");
+      }
+    }
+
+    setStoredTheme(id: string) {
+      window.localStorage.setItem("theme", id);
+    }
+
+    getStoredTheme() {
+      if (
+        typeof localStorage !== "undefined" &&
+        localStorage.getItem("theme")
+      ) {
+        return localStorage.getItem("theme");
+      }
     }
   }
 
-  (window as Window).updateTheme = async (theme: string) => {
-    const newTheme = THEMES[theme];
-
-    if (currentTheme) {
-      currentTheme.unload();
-    }
-
-    if (newTheme) {
-      currentTheme = newTheme;
-      currentTheme.load();
-    } else {
-      console.log(
-        `[Theme]: Error loading theme '${theme}' reverting to default.`
-      );
-      currentTheme = Default;
-      currentTheme.load();
-    }
-  };
+  customElements.define("site-theme-loader", SiteThemeLoader);
 </script>

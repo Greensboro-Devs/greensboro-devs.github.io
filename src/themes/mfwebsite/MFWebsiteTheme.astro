@@ -1,0 +1,18 @@
+---
+import Theme from "../Theme.astro";
+
+const name = "MF Website";
+const id = "mf-website";
+---
+
+<Theme id={id} name={name} />
+
+<script define:vars={{ id }}>
+    const theme = document.getElementById(id);
+
+    theme.onLoad = () => {};
+
+    theme.onUnload = () => {};
+</script>
+
+<style id={`style-${id}`} is:global is:inline></style>

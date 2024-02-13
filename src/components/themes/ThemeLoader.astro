@@ -16,7 +16,7 @@ import NinetyNineTheme from "../../themes/ninetynine/NinetyNineTheme.astro";
       super();
 
       window.addEventListener("themeChange", (e: Event) => {
-        const newThemeId = (e as CustomEvent).detail;
+        const newThemeId = (e as CustomEvent).detail.id;
         this.loadTheme(newThemeId);
       });
 

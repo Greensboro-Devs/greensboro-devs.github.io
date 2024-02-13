@@ -2,10 +2,12 @@
 
 ---
 
-<theme-select>
-  <select id="theme-select">
-    <!-- Themes are dynamically loaded here -->
-  </select>
+<theme-select id="themes">
+  <!-- <select id="theme-select"> -->
+  <!-- Themes are dynamically loaded here -->
+  <!-- </select> -->
+  <button id="themes-button"></button>
+  <div id="themes-list"></div>
 </theme-select>
 
 <script>
@@ -13,9 +15,15 @@
     constructor() {
       super();
 
-      const select = this.querySelector("select");
-      select?.addEventListener("change", (event) => {
-        this.changeTheme((event.target as HTMLSelectElement).value);
+      // const select = this.querySelector("select");
+      // select?.addEventListener("change", (event) => {
+      //   this.changeTheme((event.target as HTMLSelectElement).value);
+      // });
+
+      const themesButton = document.getElementById("themes-button");
+      const themesList = document.getElementById("themes-list");
+      themesButton?.addEventListener("click", () => {
+        themesList?.classList.toggle("active");
       });
 
       window.addEventListener("themeListLoaded", this.onThemeListLoaded);
@@ -26,23 +34,45 @@
       window.dispatchEvent(event);
     }
 
-    onThemeListLoaded(e: Event) {
-      const select: HTMLSelectElement | null =
-        document.querySelector("#theme-select");
+    // onThemeListLoaded(e: Event) {
+    //   const select: HTMLSelectElement | null =
+    //     document.querySelector("#theme-select");
 
-      if (select === null) return;
+    //   if (select === null) return;
+
+    //   const themes = (e as CustomEvent).detail;
+
+    //   themes.map((theme: { id: string; name: string; active: boolean }) => {
+    //     const option = document.createElement("option");
+    //     option.value = theme.id;
+    //     option.textContent = theme.name;
+    //     select.appendChild(option);
+
+    //     if (theme.active) {
+    //       select.value = option.value;
+    //     }
+    //   });
+    // }
+
+    onThemeListLoaded(e: Event) {
+      const themesList = document.getElementById("themes-list");
+      const themesButton = document.getElementById("themes-button");
+
+      if (themesList === null || themesButton === null) return;
 
       const themes = (e as CustomEvent).detail;
 
       themes.map((theme: { id: string; name: string; active: boolean }) => {
-        const option = document.createElement("option");
-        option.value = theme.id;
-        option.textContent = theme.name;
-        select.appendChild(option);
-
+        const option = document.createElement("div");
+        option.id = theme.id;
+        option.innerText = theme.name;
+        option.classList.add("themes-list-item");
         if (theme.active) {
-          select.value = option.value;
+          themesButton.textContent = theme.name;
+          option.classList.add("selected");
         }
+        console.log(theme.id);
+        themesList.appendChild(option);
       });
     }
   }

@@ -1,10 +1,12 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ThemeSelect from "../components/themes/ThemeSelect.astro";
+import DefaultTheme from "../themes/DefaultTheme.astro";
+import BackgroundAnimation from "../scripts/BackgroundAnimation.astro";
 ---
 
 <BaseLayout>
-  <ThemeSelect />
+  <DefaultTheme />
+  <BackgroundAnimation />
   <section id="home">
     <h1>
       <span class="title-prefix">Welcome to</span> Greensboro <br /> Devs

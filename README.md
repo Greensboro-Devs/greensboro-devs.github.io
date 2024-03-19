@@ -2,4 +2,5 @@
 The official website of the Greensboro Devs group.
 
 
-## How to make a theme
+## Instructions to Run
+1. Run the command `npm install`

@@ -2,9 +2,10 @@
 
 ---
 
-<theme-select id="themes">
-  <button id="themes-button"></button>
-  <div id="themes-list"></div>
+<theme-select>
+  <select id="theme-select">
+    <!-- Themes are dynamically loaded here -->
+  </select>
 </theme-select>
 
 <script>
@@ -12,98 +13,39 @@
     constructor() {
       super();
 
-      const themesButton = document.getElementById("themes-button");
-      const themesList = document.getElementById("themes-list");
-
-      this.onThemeListLoaded.bind(this);
-      themesButton?.addEventListener("click", () => {
-        themesList?.classList.toggle("active");
+      const select = this.querySelector("select");
+      select?.addEventListener("change", (event) => {
+        this.changeTheme((event.target as HTMLSelectElement).value);
       });
 
       window.addEventListener("themeListLoaded", this.onThemeListLoaded);
+    }
 
-      window.addEventListener("themeChange", (e: Event) => {
-        (themesButton as HTMLButtonElement).textContent = (
-          e as CustomEvent
-        ).detail.name;
-      });
-
-      window.addEventListener("click", () => {
-        themesList?.classList.toggle("active");
-      });
-
-      themesButton?.addEventListener("click", (e) => {
-        // Prevents clicking on theme from closing themes dropdown
-        e.stopPropagation();
-      });
+    changeTheme(theme: string) {
+      const event = new CustomEvent("themeChange", { detail: theme });
+      window.dispatchEvent(event);
     }
 
     onThemeListLoaded(e: Event) {
-      const themesList = document.getElementById("themes-list");
-      const themesButton = document.getElementById("themes-button");
+      const select: HTMLSelectElement | null =
+        document.querySelector("#theme-select");
 
-      if (themesList === null || themesButton === null) return;
+      if (select === null) return;
 
       const themes = (e as CustomEvent).detail;
 
       themes.map((theme: { id: string; name: string; active: boolean }) => {
-        const option = document.createElement("div");
-        option.id = theme.id;
-        option.innerText = theme.name;
-        option.classList.add("themes-list-item");
-        option.onclick = () => {
-          const event = new CustomEvent("themeChange", { detail: theme });
-          window.dispatchEvent(event);
-        };
+        const option = document.createElement("option");
+        option.value = theme.id;
+        option.textContent = theme.name;
+        select.appendChild(option);
+
         if (theme.active) {
-          themesButton.textContent = theme.name;
-          option.classList.add("selected");
+          select.value = option.value;
         }
-        console.log(theme.id);
-        themesList.appendChild(option);
       });
     }
   }
 
   customElements.define("theme-select", ThemeSelect);
 </script>
-
-<style is:global>
-  #themes {
-    position: relative;
-  }
-
-  #themes-button {
-    background-color: #fafafa;
-    border: 1px solid gainsboro;
-    cursor: pointer;
-    padding: 10px 20px;
-  }
-
-  #themes-button:hover {
-    background-color: gainsboro;
-  }
-
-  #themes-list {
-    display: none;
-    border: 1px solid gainsboro;
-  }
-
-  #themes-list.active {
-    position: absolute;
-    width: 100%;
-    display: block;
-    background-color: #fafafa;
-    z-index: 100;
-  }
-
-  .themes-list-item {
-    padding: 10px 20px;
-    font-size: small;
-  }
-
-  .themes-list-item:hover {
-    cursor: pointer;
-    background-color: gainsboro;
-  }
-</style>

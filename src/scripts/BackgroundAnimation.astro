@@ -1,0 +1,61 @@
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById("home");
+
+    if (container === null) return;
+
+    const iconDiv = document.createElement("div");
+    iconDiv.classList.add("icon-container");
+
+    const icons = [
+      "fa-code",
+      "fa-folder",
+      "fa-file-code",
+      "fa-terminal",
+      "fa-gear",
+      "fa-microchip",
+      "fa-laptop-code",
+    ];
+
+    const colors = ["color-1", "color-2", "color-3"];
+    const delays = [
+      "delay-none",
+      "delay-xs",
+      "delay-sm",
+      "delay-md",
+      "delay-lg",
+      "delay-xl",
+    ];
+    const speed = [
+      "animation-speed-base",
+      "animation-speed-slow",
+      "animation-speed-fast",
+      "animation-speed-xslow",
+      "animation-speed-xfast",
+    ];
+
+    const ICON_COUNT = 40;
+
+    for (let i = 0; i < ICON_COUNT; i++) {
+      const iconElement = document.createElement("i");
+      iconElement.classList.add("animation-icon");
+      iconElement.classList.add("fa-solid");
+      iconElement.classList.add(icons[i % icons.length]);
+      iconElement.classList.add(colors[i % colors.length]);
+      iconElement.classList.add(delays[i % delays.length]);
+      iconElement.classList.add(speed[i % speed.length]);
+      iconElement.style.left = `${((i % 9) + 1) * 10}%`;
+
+      iconDiv.appendChild(iconElement);
+    }
+
+    container.appendChild(iconDiv);
+
+    const scrollIndicator = document.getElementById("scroll-indicator");
+    if (scrollIndicator === null) return;
+
+    window.addEventListener("scroll", () => {
+      scrollIndicator.style.opacity = `${window.scrollY > 0 ? 0 : 1}`;
+    });
+  });
+</script>

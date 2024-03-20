@@ -1,0 +1,59 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import DefaultTheme from "../themes/DefaultTheme.astro";
+import BackgroundAnimation from "../scripts/BackgroundAnimation.astro";
+---
+
+<BaseLayout>
+  <DefaultTheme />
+  <BackgroundAnimation />
+  <section id="home">
+    <h1>
+      <span class="title-prefix">Welcome to</span> Greensboro <br /> Devs
+    </h1>
+    <i id="scroll-indicator" class="fa-solid fa-chevron-down"></i>
+  </section>
+  <section id="about">
+    <div>
+      <h2><i class="fa-solid fa-users"></i>Our Community</h2>
+      <p>
+        We are programmers and tech enthusiasts located in Greensboro, NC and
+        surrounding areas. Whether you're a beginner or a seasoned developer,
+        we're here to connect, learn, and grow together.
+      </p>
+    </div>
+
+    <div>
+      <h2><i class="fa-solid fa-calendar"></i>How We Engage</h2>
+      <p>
+        We host monthly meetups for project sharing, tech discussions,
+        networking, and learning. We embrace a broad spectrum of programming
+        topics, spanning web development, game design, and much more.
+      </p>
+    </div>
+    <div>
+      <h2><i class="fa-solid fa-rocket"></i>Our Vision</h2>
+      <p>
+        We see Greensboro Devs as the go-to hub for local tech enthusiasts to
+        come together, learn, and be creative. We aim to create a thriving,
+        inclusive community where we can share our passion for programming.
+      </p>
+    </div>
+  </section>
+  <section id="info">
+    <h2 class="section-title">Get Involved</h2>
+    <a href="https://discord.gg/MRf6ACrrMJ" target="_blank" class="button">
+      <i class="fa-brands fa-discord"></i> Join us on Discord
+    </a>
+    <a
+      href="https://www.meetup.com/greensboro-devs/"
+      target="_blank"
+      class="link"
+    >
+      Or check us out on Meetup.com
+    </a>
+  </section>
+  <section id="footer">
+    <p>© 2024 Greensboro Devs Community</p>
+  </section>
+</BaseLayout>
